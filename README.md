@@ -8,5 +8,3 @@ Over time, this repository may evolve beyond a static site. Planned or potential
 A key goal of the project is content synchronization across platforms. The website is treated as a primary source of truth, with an emphasis on keeping personal work, experiments, and published material organized in one place rather than scattered across external services.
 
 The site is also used as a sandbox for creative and technical exploration. This includes experiments with graphics, animation, and interaction using native web technologies, as well as performance-focused JavaScript and browser APIs. These experiments are intended to be playful, self-contained, and easy to inspect or modify.
-
-Overall, this repository reflects a preference for minimalism, direct control, and longevity. It is designed to grow organically, remain easy to reason about, and serve both as a personal hub and a platform for future ideas without locking the project into a specific stack or hosting model.
