@@ -27,7 +27,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-image: url("/christineee/images/christineee-background.jpg");
+  background-image: url("/images/christineee-background.jpg");
   background-repeat: repeat;        /* tiles the image */
   background-position: top left;     /* default; optional */
   background-size: 100px 100px; /* adjust smaller/larger as needed */
@@ -112,7 +112,7 @@ body::after {
   content: "";
   position: absolute;
   inset: -40%;
-  background: url("/christineee/videos/bg-poster.jpg") center / cover no-repeat;
+  background: url("/videos/bg-poster.jpg") center / cover no-repeat;
   filter: blur(60px) saturate(1.0);
   opacity: 0; /* start hidden */
   animation: pulseGlow 8s ease-in-out infinite;
