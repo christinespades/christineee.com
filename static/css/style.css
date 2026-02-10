@@ -83,7 +83,7 @@ body::after {
 }
 
 .container {
-  max-width: 720px;
+  max-width: 920px;
   margin: 120px auto 2rem;
   padding: 2rem;
   padding-top: 4rem;
@@ -302,8 +302,8 @@ footer {
 }
 
 .social-embed {
-  width: 320px;
-  max-width: 100%;
+  width: 220px;
+  max-width: 60%;
 }
 
 @media (max-width: 768px) {
