@@ -302,8 +302,8 @@ footer {
 }
 
 .social-embed {
-  width: 220px;
-  max-width: 60%;
+  width: 320px;
+  max-width: 40%;
 }
 
 @media (max-width: 768px) {
