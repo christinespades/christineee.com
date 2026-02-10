@@ -295,6 +295,23 @@ footer {
   color: #9ca3af;
 }
 
+.hero-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.social-embed {
+  width: 320px;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero-row {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 480px) {
   .top-bar {
     flex-direction: column;
