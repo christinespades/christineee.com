@@ -27,7 +27,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-image: url("/images/christineee-background.jpg");
+  background-image: url("/images/newbg.jpg");
   background-repeat: repeat;        /* tiles the image */
   background-position: top left;     /* default; optional */
   background-size: 100px 100px; /* adjust smaller/larger as needed */
