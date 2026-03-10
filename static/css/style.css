@@ -184,12 +184,12 @@ body.loaded .container::before {
 }
 
 .profile h1 {
-  font-size: 1.75rem;
+  font-size: 1.95rem;
   font-weight: 700;
 }
 
 .bio {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: #6b7280;
   margin-top: 8px;
 }
@@ -201,9 +201,9 @@ body.loaded .container::before {
 }
 
 .link-btn {
-  aspect-ratio: 1 / 0.25;
+  aspect-ratio: 1 / 0.15;
   padding: 0;
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   gap: 12px;
