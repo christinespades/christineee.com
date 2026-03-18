@@ -203,12 +203,13 @@ body.loaded .container::before {
 .link-btn {
   aspect-ratio: 1 / 0.15;
   padding: 0;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-align: left;
 
+  display: flex;              /* fix */
+  align-items: center;
+  justify-content: flex-start; /* better for text + icon layout */
+  gap: 12px;
+
+  text-align: left;
   background: rgba(255,255,255,0.06);
   color: white;
 
