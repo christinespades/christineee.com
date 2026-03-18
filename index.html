@@ -211,14 +211,29 @@
   d.getElementsByTagName("head")[0].appendChild(js);
 }(document, "script", "EmbedSocialHashtagScript"));
 </script>
+<style>
+  #bgCanvas {
+    position: fixed;      /* stays behind content and fixed on scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;           /* behind everything */
+    pointer-events: none; /* clicks pass through */
+  }
+</style>
   <canvas id="bgCanvas"></canvas>
-
 <script>
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // initial size
+  
 let particles = [];
 for(let i=0;i<100;i++){
   particles.push({
@@ -231,7 +246,7 @@ for(let i=0;i<100;i++){
 }
 
 function animate(){
-  ctx.fillStyle = 'rgba(0,0,0,0.05)';
+  ctx.fillStyle = 'rgba(0.1,0,0,0.05)';
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle = 'white';
   particles.forEach(p=>{
@@ -240,7 +255,7 @@ function animate(){
     if(p.x<0||p.x>canvas.width) p.vx*=-1;
     if(p.y<0||p.y>canvas.height) p.vy*=-1;
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.radius,0,2*Math.PI);
+    ctx.arc(p.x,p.y,p.radius,0,42*Math.PI);
     ctx.fill();
   });
   requestAnimationFrame(animate);
