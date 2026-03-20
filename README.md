@@ -1,6 +1,6 @@
 # christineee.com, christinespades.com
 ## Overview
-Repository for christineee.com, a personal website built with plain HTML, CSS, and JavaScript. The project is intentionally lightweight, dependency-free, and easy to host, with a focus on clarity, performance, and long-term flexibility rather than frameworks or build tooling.
+Repository for my personal website built with plain HTML, CSS, and JavaScript. The project is intentionally lightweight, dependency-free, and easy to host, with a focus on clarity, performance, and long-term flexibility rather than frameworks or build tooling.
 
 The site currently uses free static hosting and serves as a centralized place to publish content, experiments, and small interactive projects. The codebase is kept simple and transparent to allow fast iteration, easy maintenance, and direct control over behavior and presentation.
 
