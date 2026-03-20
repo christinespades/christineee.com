@@ -1,4 +1,4 @@
-# christineee.com
+# christineee.com, christinespades.com
 ## Overview
 Repository for christineee.com, a personal website built with plain HTML, CSS, and JavaScript. The project is intentionally lightweight, dependency-free, and easy to host, with a focus on clarity, performance, and long-term flexibility rather than frameworks or build tooling.
 
@@ -12,7 +12,7 @@ The site is also used as a sandbox for creative and technical exploration. This 
 
 ## License & Usage
 
-Copyright © 2025–2026 Christineee. All rights reserved.
+Copyright © 2025–2026 Christine Spades. All rights reserved.
 
 This repository is proprietary software.
 Unauthorized copying, modification, redistribution, hosting, or commercial use is strictly prohibited.
