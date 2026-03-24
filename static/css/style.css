@@ -101,7 +101,7 @@ body::after {
 }
 
 .container:hover {
-  transform: perspective(1000px) rotateX(1deg) rotateY(-1deg);
+  transform: none !important;
   box-shadow:
     0 0 80px rgba(80, 60, 110, 0.35),
     inset 0 0 60px rgba(50, 35, 75, 0.45);
