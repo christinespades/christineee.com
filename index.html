@@ -196,32 +196,38 @@
 <script>
 async function loadCommits() {
   const username = "christinespades";
+  const repos = [
+    "christineee.com",
+    "ildzium-engine",
+    "linguist"
+  ];
+
   const container = document.getElementById("github-commits");
 
   try {
-    const res = await fetch(`https://api.github.com/users/${username}/events`);
-
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status}`);
-    }
-
-    const events = await res.json();
-
-    // Guard: sometimes API returns an error object instead of array
-    if (!Array.isArray(events)) {
-      throw new Error("Unexpected API response");
-    }
-
-    const commits = events
-      .filter(e => e.type === "PushEvent" && e.payload && e.payload.commits)
-      .flatMap(e =>
-        e.payload.commits.map(c => ({
-          message: c.message ? c.message.split("\n")[0] : "(no message)",
-          repo: e.repo.name,
-          url: `https://github.com/${e.repo.name}/commit/${c.sha}`,
-          date: e.created_at
-        }))
+    // Fetch commits from all repos in parallel
+    const results = await Promise.all(
+      repos.map(repo =>
+        fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
+          .then(res => res.json())
+          .then(data =>
+            Array.isArray(data)
+              ? data.slice(0, 3).map(c => ({
+                  message: c.commit.message.split("\n")[0],
+                  repo: repo,
+                  url: c.html_url,
+                  date: c.commit.author.date
+                }))
+              : []
+          )
+          .catch(() => [])
       )
+    );
+
+    // Merge + sort by date
+    const commits = results
+      .flat()
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
       .slice(0, 5);
 
     if (commits.length === 0) {
@@ -245,10 +251,13 @@ async function loadCommits() {
     }).join("");
 
   } catch (err) {
-    console.error("GitHub fetch error:", err);
-    container.innerHTML = "Unable to load commits right now.";
+    console.error(err);
+    container.innerHTML = "Failed to load commits.";
   }
 }
+
+loadCommits();
+</script>
 
 loadCommits();
 </script>
