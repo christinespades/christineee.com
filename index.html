@@ -69,6 +69,7 @@
         // software projects.</small>
       </span>
     </a>
+    <div id="github-commits"></div>
     <a href="https://youtube.com/@christinespades" class="link-btn" target="_blank" rel="noopener">
       <img src="/images/vfx.ico" alt="" class="link-icon">
       <span class="link-text">
@@ -190,6 +191,51 @@
   js.src = "https://embedsocial.com/cdn/ht.js";
   d.getElementsByTagName("head")[0].appendChild(js);
 }(document, "script", "EmbedSocialHashtagScript"));
+</script>
+<script>
+async function loadCommits() {
+  const username = "christinespades";
+  const container = document.getElementById("github-commits");
+
+  try {
+    const res = await fetch(`https://api.github.com/users/${username}/events`);
+    const events = await res.json();
+
+    // Filter only push events (these contain commits)
+    const commits = events
+      .filter(event => event.type === "PushEvent")
+      .flatMap(event => {
+        return event.payload.commits.map(commit => ({
+          message: commit.message.split("\n")[0],
+          repo: event.repo.name,
+          url: `https://github.com/${event.repo.name}/commit/${commit.sha}`,
+          date: event.created_at
+        }));
+      })
+      .slice(0, 5); // limit total commits shown
+
+    container.innerHTML = commits.map(c => {
+      const date = new Date(c.date).toLocaleDateString();
+
+      return `
+        <div class="commit">
+          <a href="${c.url}" target="_blank" rel="noopener">
+            ${c.message}
+          </a>
+          <div class="meta">
+            ${c.repo} • ${date}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+  } catch (err) {
+    container.innerHTML = "Failed to load commits";
+    console.error(err);
+  }
+}
+
+loadCommits();
 </script>
 </body>
 </html>
