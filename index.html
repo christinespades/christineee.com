@@ -192,27 +192,44 @@
   d.getElementsByTagName("head")[0].appendChild(js);
 }(document, "script", "EmbedSocialHashtagScript"));
 </script>
+
 <script>
 async function loadCommits() {
   const username = "christinespades";
+  const token = "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"; // <-- add your GitHub token
   const container = document.getElementById("github-commits");
 
   try {
-    const res = await fetch(`https://api.github.com/users/${username}/events`);
+    const res = await fetch(`https://api.github.com/users/${username}/events`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json"
+      }
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`GitHub API error: ${res.status} ${text}`);
+    }
+
     const events = await res.json();
 
-    // Filter only push events (these contain commits)
     const commits = events
-      .filter(event => event.type === "PushEvent")
-      .flatMap(event => {
-        return event.payload.commits.map(commit => ({
-          message: commit.message.split("\n")[0],
-          repo: event.repo.name,
-          url: `https://github.com/${event.repo.name}/commit/${commit.sha}`,
-          date: event.created_at
-        }));
-      })
-      .slice(0, 5); // limit total commits shown
+      .filter(e => e.type === "PushEvent")
+      .flatMap(e =>
+        e.payload.commits.map(c => ({
+          message: c.message.split("\n")[0],
+          repo: e.repo.name,
+          url: `https://github.com/${e.repo.name}/commit/${c.sha}`,
+          date: e.created_at
+        }))
+      )
+      .slice(0, 5);
+
+    if (commits.length === 0) {
+      container.innerHTML = "No recent commits found.";
+      return;
+    }
 
     container.innerHTML = commits.map(c => {
       const date = new Date(c.date).toLocaleDateString();
