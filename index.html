@@ -196,29 +196,27 @@
 <script>
 async function loadCommits() {
   const username = "christinespades";
-  const token = "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"; // <-- add your GitHub token
   const container = document.getElementById("github-commits");
 
   try {
-    const res = await fetch(`https://api.github.com/users/${username}/events`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/vnd.github+json"
-      }
-    });
+    const res = await fetch(`https://api.github.com/users/${username}/events`);
 
     if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`GitHub API error: ${res.status} ${text}`);
+      throw new Error(`HTTP ${res.status}`);
     }
 
     const events = await res.json();
 
+    // Guard: sometimes API returns an error object instead of array
+    if (!Array.isArray(events)) {
+      throw new Error("Unexpected API response");
+    }
+
     const commits = events
-      .filter(e => e.type === "PushEvent")
+      .filter(e => e.type === "PushEvent" && e.payload && e.payload.commits)
       .flatMap(e =>
         e.payload.commits.map(c => ({
-          message: c.message.split("\n")[0],
+          message: c.message ? c.message.split("\n")[0] : "(no message)",
           repo: e.repo.name,
           url: `https://github.com/${e.repo.name}/commit/${c.sha}`,
           date: e.created_at
@@ -227,7 +225,7 @@ async function loadCommits() {
       .slice(0, 5);
 
     if (commits.length === 0) {
-      container.innerHTML = "No recent commits found.";
+      container.innerHTML = "No recent commits.";
       return;
     }
 
@@ -247,8 +245,8 @@ async function loadCommits() {
     }).join("");
 
   } catch (err) {
-    container.innerHTML = "Failed to load commits";
-    console.error(err);
+    console.error("GitHub fetch error:", err);
+    container.innerHTML = "Unable to load commits right now.";
   }
 }
 
