@@ -26,7 +26,7 @@ document.querySelectorAll('.link-btn, .container').forEach(el => {
 // GitHub commits loader
 async function loadCommits() {
   const username = "christinespades";
-  const repos = ["christineee.com", "ildzium-engine", "linguist"];
+  const repos = ["christineee.com", "christine-machine", "ildzium-engine", "ildz-compiler", "linguist"];
   const container = document.getElementById("github-commits");
   
   try {
