@@ -231,17 +231,99 @@ body.loaded .container::before {
 }
 
 #github-commits {
-  margin-top: 10px;
-  font-size: 0.9em;
+  margin-top: 12px;
+  max-height: 420px;           /* ← This keeps the height fixed */
+  overflow-y: auto;            /* Nice vertical scrollbar */
+  padding-right: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #222;
+  font-size: 0.92em;
+  line-height: 1.45;
 }
 
+/* Webkit scrollbar styling */
+#github-commits::-webkit-scrollbar {
+  width: 6px;
+}
+
+#github-commits::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+}
+
+#github-commits::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 10px;
+}
+
+#github-commits::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Commit item styling */
 .commit {
-  margin-bottom: 6px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border-left: 3px solid #00ff9d;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.commit .meta {
-  opacity: 0.6;
-  font-size: 0.8em;
+.commit:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 255, 157, 0.1);
+}
+
+.commit-link {
+  color: #c9d1d9;
+  text-decoration: none;
+  display: block;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+}
+
+.commit-message {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.commit-sha {
+  font-size: 0.78em;
+  color: #8b949e;
+  font-family: 'SF Mono', monospace;
+}
+
+.meta {
+  margin-top: 6px;
+  font-size: 0.81em;
+  color: #8b949e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repo {
+  font-family: monospace;
+  background: rgba(0, 255, 157, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #00ff9d;
+}
+
+.date {
+  opacity: 0.8;
+}
+
+/* Optional: subtle glow on the whole container */
+#github-commits {
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  background: #0d1117;
+  padding: 8px;
 }
 
 footer {

@@ -32,15 +32,16 @@ async function loadCommits() {
   try {
     const results = await Promise.all(
       repos.map(repo =>
-        fetch(`https://api.github.com/repos/${username}/${repo}/commits`)
+        fetch(`https://api.github.com/repos/${username}/${repo}/commits?per_page=10`)
           .then(res => res.json())
           .then(data =>
             Array.isArray(data)
-              ? data.slice(0, 3).map(c => ({
+              ? data.map(c => ({
                   message: c.commit.message.split("\n")[0],
                   repo: repo,
                   url: c.html_url,
-                  date: c.commit.author.date
+                  date: c.commit.author.date,
+                  sha: c.sha.substring(0, 7)
                 }))
               : []
           )
@@ -48,29 +49,38 @@ async function loadCommits() {
       )
     );
 
+    // Flatten, sort by date (newest first), and take more commits
     const commits = results
       .flat()
       .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 15);
+      .slice(0, 30);   // You can increase this further if you want
 
     if (commits.length === 0) {
-      container.innerHTML = "No recent commits.";
+      container.innerHTML = "No recent commits found.";
       return;
     }
 
     container.innerHTML = commits.map(c => {
-      const date = new Date(c.date).toLocaleDateString();
+      const date = new Date(c.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+
       return `
         <div class="commit">
-          <a href="${c.url}" target="_blank" rel="noopener">
-            ${c.message}
+          <a href="${c.url}" target="_blank" rel="noopener" class="commit-link">
+            <span class="commit-message">${c.message}</span>
+            <span class="commit-sha">${c.sha}</span>
           </a>
           <div class="meta">
-            ${c.repo} • ${date}
+            <span class="repo">${c.repo}</span>
+            <span class="date">${date}</span>
           </div>
         </div>
       `;
     }).join("");
+
   } catch (err) {
     console.error(err);
     container.innerHTML = "Failed to load commits.";
