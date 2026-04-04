@@ -35,36 +35,39 @@ body::after {
   z-index: 999;
 }
 
+/* Top navigation bar - minimal, floating, rounded, responsive */
 .top-bar {
-  position: static;         /* stays at top, does not scroll */
-  top: 0;
+  position: fixed;              /* float above content */
+  top: 12px;                    /* small offset from top */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
-  padding: 4px 8px;         /* smaller padding */
-  background: rgba(0,0,0,0.85);  /* slightly translucent black */
-  border-radius: 12px;      /* rounded corners */
-  max-width: 360px;         /* compact on large screens */
-  justify-content: center;
-  font-size: 0.72rem;       /* small text */
-  white-space: nowrap;       /* prevent wrapping */
-  overflow-x: auto;          /* allow horizontal scroll if needed on tiny screens */
-  scrollbar-width: none;      /* hide scrollbar in Firefox */
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.7);  /* semi-transparent black */
+  backdrop-filter: blur(12px);  /* subtle blur behind bar */
+  border-radius: 16px;          /* fully rounded corners */
+  z-index: 999;                 /* always on top */
+  max-width: 95%;               /* fit smaller screens */
+  overflow-x: auto;             /* allow horizontal scroll on tiny screens */
+  white-space: nowrap;          /* prevent wrapping */
+  scrollbar-width: none;        /* hide scrollbar Firefox */
 }
 
 .top-bar::-webkit-scrollbar {
-  display: none;             /* hide scrollbar in WebKit browsers */
+  display: none;                /* hide scrollbar Chrome/Safari */
 }
 
+/* Individual link style */
 .top-link {
-  padding: 4px 10px;         /* smaller clickable area */
-  font-size: 0.72rem;
-  border-radius: 8px;
-  text-decoration: none;
+  padding: 6px 12px;            /* clickable area */
+  font-size: 0.75rem;           /* small text */
   color: white;
+  text-decoration: none;
+  border-radius: 12px;          /* pill shape */
   background: rgba(255,255,255,0.05);
   transition: all 0.25s ease;
+  flex-shrink: 0;               /* prevent shrinking on small screens */
 }
 
 .top-link:hover {
@@ -367,6 +370,14 @@ footer {
 
 /* Mobile fixes - perfect centering + breathing room + smaller scale */
 @media (max-width: 768px) {
+  .top-bar {
+    gap: 4px;
+    padding: 3px 6px;
+  }
+  .top-link {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
   .container {
     margin: 90px 1rem 2rem;
     padding: 1.4rem;
