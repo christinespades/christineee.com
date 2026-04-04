@@ -36,43 +36,41 @@ body::after {
 }
 
 .top-bar {
-  position: fixed;
-  top: 12px;
+  position: static;         /* stays at top, does not scroll */
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 92vw;
-  max-width: 520px;
   display: flex;
   gap: 8px;
-  padding: 8px;
-  backdrop-filter: blur(18px);
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 16px;
-  z-index: 50;
+  padding: 4px 8px;         /* smaller padding */
+  background: rgba(0,0,0,0.85);  /* slightly translucent black */
+  border-radius: 12px;      /* rounded corners */
+  max-width: 360px;         /* compact on large screens */
+  justify-content: center;
+  font-size: 0.72rem;       /* small text */
+  white-space: nowrap;       /* prevent wrapping */
+  overflow-x: auto;          /* allow horizontal scroll if needed on tiny screens */
+  scrollbar-width: none;      /* hide scrollbar in Firefox */
+}
+
+.top-bar::-webkit-scrollbar {
+  display: none;             /* hide scrollbar in WebKit browsers */
 }
 
 .top-link {
-  flex: 1;
-  text-align: center;
-  padding: 8px 0;
+  padding: 4px 10px;         /* smaller clickable area */
+  font-size: 0.72rem;
+  border-radius: 8px;
   text-decoration: none;
   color: white;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.35);
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(14px);
-  transition: all 0.35s ease;
+  transition: all 0.25s ease;
 }
 
 .top-link:hover {
-  background: rgba(255,255,255,0.18);
-  box-shadow:
-    0 0 20px rgba(255,255,255,0.35),
-    inset 0 0 18px rgba(255,255,255,0.3);
-  transform: translateY(-2px);
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(255,255,255,0.2);
 }
 
 .container {
