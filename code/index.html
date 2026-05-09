@@ -22,7 +22,7 @@
           	<br>
 			  <a href="https://github.com/christinespades/ildzium-engine/tree/main" target="_blank" class="link-btn">
 			    <span class="link-text">ILDZIUM ENGINE.<br>
-          			<small>toy windows game engine in c. vulkan.</span>
+          			<small>toy game engine in c with vulkan on windows. also a running web version with emscripten/wasm/webgpu.</span>
 			  </a>
             <br>
           	this is the 5th time i restart from scratch. trying to keep it simpler, more minimal, this time.
@@ -34,7 +34,30 @@
 			    <img src="images/ildzium1.png" alt="Screenshot 1">
 			  </div>
           	<br>
-          	i will update these and also get a running web version here eventually.
+          	a running web version here, i guess, but after days of debugging i still can't figure out why none of the draws are showing :(
+            <!-- ILDZIUM ENGINE DIRECT EMBED -->
+            <div class="demo-container" style="margin: 40px 0;">
+              <p style="margin-bottom:8px; color:#888; font-size:0.9em;">Live WebGPU Demo</p>
+              <div style="border:1px solid #222; border-radius:8px; overflow:hidden; background:#000;">
+                <canvas id="canvas" width="1280" height="720" style="width:100%; display:block;"></canvas>
+              </div>
+            </div>
+
+            <!-- Emscripten glue code -->
+            <script type="text/javascript">
+              var Module = {
+                canvas: document.getElementById('canvas'),
+                onRuntimeInitialized: function() {
+                  console.log("✅ ILDZIUM Engine initialized");
+                  // You can call your own init functions here if needed
+                },
+                print: function(text) { console.log(text); },
+                printErr: function(text) { console.error(text); }
+              };
+            </script>
+
+            <!-- Load your engine -->
+            <script src="/static/js/ildzium.js" async></script>   <!-- ← change path if needed -->
           	<br>
           	and i'll have some video showcases here:
 		    <div class="link-btn iframe-wrapper">
