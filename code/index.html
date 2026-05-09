@@ -33,9 +33,8 @@
 			    <img src="images/ildzium0.png" alt="Screenshot 0">
 			    <img src="images/ildzium1.png" alt="Screenshot 1">
 			  </div>
-          	<br>
+          	<br><br>
           	a running web version here, i guess, but after days of debugging i still can't figure out why none of the draws are showing :(
-            <!-- ILDZIUM ENGINE DIRECT EMBED -->
             <div class="demo-container" style="margin: 40px 0;">
               <p style="margin-bottom:8px; color:#888; font-size:0.9em;">Live WebGPU Demo</p>
               <div style="border:1px solid #222; border-radius:8px; overflow:hidden; background:#000;">
@@ -43,21 +42,19 @@
               </div>
             </div>
 
-            <!-- Emscripten glue code -->
             <script type="text/javascript">
               var Module = {
                 canvas: document.getElementById('canvas'),
+                print: function(text) { console.log(text); },
+                printErr: function(text) { console.error(text); },
                 onRuntimeInitialized: function() {
-                  console.log("✅ ILDZIUM Engine initialized");
-                  // You can call your own init functions here if needed
+                  console.log("✅ ILDZIUM Engine (WebGPU) initialized");
                 },
                 print: function(text) { console.log(text); },
                 printErr: function(text) { console.error(text); }
               };
             </script>
-
-            <!-- Load your engine -->
-            <script src="/static/js/ildzium.js" async></script>   <!-- ← change path if needed -->
+            <script src="/static/js/ildzium.js" async></script>   
           	<br>
           	and i'll have some video showcases here:
 		    <div class="link-btn iframe-wrapper">
