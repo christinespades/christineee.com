@@ -44,15 +44,21 @@
 
             <script type="text/javascript">
               var Module = {
-                canvas: document.getElementById('canvas'),
-                print: function(text) { console.log(text); },
-                printErr: function(text) { console.error(text); },
-                onRuntimeInitialized: function() {
-                  console.log("✅ ILDZIUM Engine (WebGPU) initialized");
-                },
-                print: function(text) { console.log(text); },
-                printErr: function(text) { console.error(text); }
-              };
+                  canvas: document.getElementById('canvas'),
+                  print: function(text) { console.log("[Engine]", text); },
+                  printErr: function(text) { console.error("[Engine]", text); },
+                  
+                  onRuntimeInitialized: function() {
+                    console.log("✅ ILDZIUM Engine loaded successfully");
+
+                    if (typeof _main === "function") {
+                      console.log("Calling _main()...");
+                      _main();
+                    } else {
+                      console.error("_main() not found!");
+                    }
+                  }
+                };
             </script>
             <script src="/static/js/ildzium.js" async></script>   
           	<br>
